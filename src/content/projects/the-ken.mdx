@@ -1,0 +1,100 @@
+export const metadata = {
+  title: "Driving a 5.6% Lift in Subscription Conversions for The Ken",
+  slug: "the-ken",
+  summary:
+    "A one-column editorial case study on how we reshaped the subscription journey to improve conversion without disrupting the newsroom rhythm.",
+  role: "UX Research, Conversion Strategy, Experiment Design",
+  year: "2024",
+  timeline: "4 weeks",
+  status: "launched",
+  tags: ["Media", "Subscriptions", "Conversion optimization"],
+  coverImage: "/problem5.svg",
+  published: true,
+  featured: true,
+  sortOrder: 3,
+};
+
+<ProblemSection
+  title={
+    <>
+      The Problem:
+      <br />
+      A checkout that no longer reflected the business or the brand.
+    </>
+  }
+>
+
+The Ken is a subscription-driven digital publication based in Bangalore, with over 25,000 paying subscribers and half a million readers across Asia.<br /><br />The checkout was where the business converted readers into subscribers. It performed well enough, but the company was changing underneath it.<br /><br />Annual one-time payments were giving way to recurring subscriptions. The brand had been refreshed across the app and parts of the website, but not here. And the flow itself had collected friction over time.
+
+<Figure
+  src="/problem2.png"
+  alt="Subscription journey highlighting drop-offs between paywall and checkout."
+  caption="Funnel review showed the largest losses in the handoff from article intent to payment confirmation."
+/>
+
+Three problems, one screen. The new checkout had to introduce recurring payments, carry the refreshed brand, and clean up the experience along the way.
+
+</ProblemSection>
+
+<SectionDivider />
+
+<SolutionSection
+  title={
+    <>
+      The Solution:
+      <br />
+      One step, not five.
+    </>
+  }
+>
+
+<Figure
+  src="/solution3.png"
+  alt="Reworked subscription page with clearer plan hierarchy and stronger trust cues."
+  caption="Updated pricing and plan hierarchy reduced choice fatigue for first-time subscribers."
+/>
+
+The payment summary is where the recurring model gets introduced.<br /><br />The price sits at the top, then three lines of plain-language reassurance underneath: renews annually, cancel anytime, instant refunds on accidental debits.
+
+<Figure
+  src="/solution4.png"
+  alt="Checkout screen with reduced fields and explicit payment reassurance."
+  caption="A cleaner checkout with stronger confidence cues reduced late-stage abandonment."
+/>
+
+Inputs got simpler. Country and state became dropdowns. The phone field auto-prefixed the country code.<br /><br />Small changes, but they removed the parts of the old checkout international readers tripped over most.
+
+<Figure
+  src="/solution5.png"
+  alt="Checkout form with country and state dropdowns and phone field with country code prefix."
+  caption="Simpler inputs reduced friction for international subscribers."
+/>
+
+<PullQuote>
+  The brand refresh runs through the whole page. New logo, new type, new color system, a single accent red reserved for the primary action.
+</PullQuote>
+
+</SolutionSection>
+
+<SectionDivider />
+
+<OutcomeSection
+  title={
+    <>
+      The Outcome:
+      <br />
+      Subscription conversions climbed from 68.2% to 73.8%.
+    </>
+  }
+>
+
+The redesigned checkout shipped, and three months in, the conversion rate had moved.
+
+<InlineMetrics
+  metrics={[
+    { value: "68.2% → 73.8%", label: "old conversion rate vs. new conversion rate" },
+    { value: "5.6%", label: "lift in subscription conversions" },
+  ]}
+/>
+
+</OutcomeSection>

@@ -1,0 +1,297 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { FooterSection } from "@/src/components/FooterSection";
+import { WorkSection } from "@/src/components/WorkSection";
+
+export interface CaseStudyMetric {
+  value: string;
+  label: string;
+}
+
+interface CaseStudyLayoutProps {
+  title: string;
+  slug: string;
+  coverImage?: string;
+  metrics?: CaseStudyMetric[];
+  children: ReactNode;
+}
+
+export function CaseStudyLayout({
+  title,
+  slug,
+  coverImage,
+  metrics = [],
+  children,
+}: CaseStudyLayoutProps) {
+  return (
+    <main className="flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
+      <section className="case-study-hero-outer">
+        <header className="case-study-header">
+          <div className="case-study-hero-wrap">
+            <div className="case-study-hero">
+              <Link
+                href="/"
+                aria-label="Close case study and return home"
+                className="case-study-hero-close"
+              >
+                ×
+              </Link>
+
+              <div className="case-study-hero-content">
+                <h1 className="case-study-title">{title}</h1>
+              </div>
+
+              {coverImage ? (
+                <div className="case-study-hero-media">
+                  <div className="case-study-cover">
+                    <Image
+                      src={coverImage}
+                      alt={`${title} cover visual`}
+                      width={1280}
+                      height={800}
+                      className="case-study-cover-image"
+                      sizes="(min-width: 832px) 800px, calc(100vw - 32px)"
+                      priority
+                    />
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </header>
+      </section>
+
+      <section className="w-full px-[length:var(--page-gutter-fluid)]">
+        <article
+          className="case-study-shell"
+          style={{ backgroundColor: "transparent", borderRadius: 0 }}
+        >
+          {metrics.length > 0 ? <CaseStudyMetricStrip metrics={metrics} /> : null}
+
+          <div className="case-study-body">{children}</div>
+        </article>
+      </section>
+
+      <section
+        aria-label="Other work"
+        className="mt-[length:var(--size-40)] w-full px-[length:var(--page-gutter-fluid)]"
+      >
+        <div className="mx-auto w-full max-w-[length:var(--measure-shell-rest)] rounded-[length:var(--radius-x-large)] bg-[color:var(--color-sand-25)] px-[length:var(--padding-large)] py-[length:var(--size-80)]">
+          <WorkSection title="Other work" excludeSlug={slug} limit={2} />
+        </div>
+      </section>
+
+      <FooterSection />
+    </main>
+  );
+}
+
+export function CaseStudySectionHeading({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return <h2 className="case-study-section-heading">{children}</h2>;
+}
+
+/** Wraps one narrative block (problem / solution / outcome) in a semantic section with its own prose column. */
+export function CaseStudyProseSection({
+  "aria-label": ariaLabel,
+  title,
+  leadVisual,
+  children,
+}: {
+  "aria-label": string;
+  title: ReactNode;
+  leadVisual?: { src: string; alt: string; width?: number; height?: number };
+  children: ReactNode;
+}) {
+  const leadW = leadVisual?.width ?? 120;
+  const leadH = leadVisual?.height ?? 120;
+
+  return (
+    <section className="case-study-prose-section" aria-label={ariaLabel}>
+      <div className="case-study-prose">
+        <div className="case-study-prose-header">
+          {leadVisual ? (
+            <div
+              className="case-study-section-lead-visual"
+              style={{ width: leadW, height: leadH }}
+            >
+              <Image
+                src={leadVisual.src}
+                alt={leadVisual.alt}
+                width={leadW}
+                height={leadH}
+                className="case-study-section-lead-image"
+                sizes={`${leadW}px`}
+                style={{ width: leadW, height: leadH }}
+              />
+            </div>
+          ) : null}
+          <CaseStudySectionHeading>{title}</CaseStudySectionHeading>
+        </div>
+        <div className="case-study-prose-content">{children}</div>
+      </div>
+    </section>
+  );
+}
+
+interface CaseStudyNarrativeSectionProps {
+  title: ReactNode;
+  children: ReactNode;
+}
+
+export function CaseStudyProblemSection({
+  title,
+  children,
+}: CaseStudyNarrativeSectionProps) {
+  return (
+    <CaseStudyProseSection
+      aria-label="Problem"
+      title={title}
+      leadVisual={{
+        src: "/final_problem.svg",
+        alt: "",
+        width: 120,
+        height: 120,
+      }}
+    >
+      {children}
+    </CaseStudyProseSection>
+  );
+}
+
+export function CaseStudySolutionSection({
+  title,
+  children,
+}: CaseStudyNarrativeSectionProps) {
+  return (
+    <CaseStudyProseSection
+      aria-label="Solution"
+      title={title}
+      leadVisual={{
+        src: "/final_solution.svg",
+        alt: "",
+        width: 120,
+        height: 120,
+      }}
+    >
+      {children}
+    </CaseStudyProseSection>
+  );
+}
+
+export function CaseStudyOutcomeSection({
+  title,
+  children,
+}: CaseStudyNarrativeSectionProps) {
+  return (
+    <CaseStudyProseSection
+      aria-label="Outcome"
+      title={title}
+      leadVisual={{
+        src: "/final_outcome.svg",
+        alt: "",
+        width: 120,
+        height: 120,
+      }}
+    >
+      {children}
+    </CaseStudyProseSection>
+  );
+}
+
+export function CaseStudyFigure({
+  src,
+  alt,
+  caption,
+  solidBlue,
+}: {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  /** Filled rectangle using brand sky blue (`--color-sky`), no image. */
+  solidBlue?: boolean;
+}) {
+  if (solidBlue) {
+    return (
+      <figure className="case-study-figure">
+        <div className="case-study-figure-solid" aria-hidden />
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
+  if (!src) {
+    return (
+      <figure className="case-study-figure">
+        <div className="case-study-figure-placeholder">Prototype / asset slot</div>
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </figure>
+    );
+  }
+
+  return (
+    <figure className="case-study-figure">
+      <Image
+        src={src}
+        alt={alt ?? "Case study visual"}
+        width={1200}
+        height={760}
+        className="case-study-figure-image"
+        sizes="(min-width: 832px) 800px, calc(100vw - 32px)"
+      />
+      {caption ? <figcaption>{caption}</figcaption> : null}
+    </figure>
+  );
+}
+
+export function CaseStudyMetricStrip({
+  metrics,
+}: {
+  metrics: CaseStudyMetric[];
+}) {
+  return (
+    <section className="case-study-metric-strip" aria-label="Project outcomes">
+      {metrics.map((metric, index) => (
+        <div
+          key={`${metric.value}-${metric.label}-${index}`}
+          className="case-study-metric-item"
+        >
+          <p className="case-study-metric-value">{metric.value}</p>
+          <p className="case-study-metric-label">{metric.label}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+export function CaseStudyQuote({ children }: { children: ReactNode }) {
+  return <blockquote className="case-study-quote">{children}</blockquote>;
+}
+
+export function InlineMetrics({ metrics }: { metrics: CaseStudyMetric[] }) {
+  return (
+    <section className="case-study-inline-metrics" aria-label="Inline metrics">
+      {metrics.map((metric, index) => (
+        <div
+          key={`${metric.value}-${metric.label}-${index}`}
+          className="case-study-inline-metric-item"
+        >
+          <p className="case-study-inline-metric-value">{metric.value}</p>
+          <p className="case-study-inline-metric-label">{metric.label}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+export function CaseStudySectionDivider() {
+  return (
+    <div className="case-study-section-divider" aria-hidden="true">
+      <p>~</p>
+    </div>
+  );
+}

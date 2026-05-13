@@ -1,26 +1,543 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background colors */
+  --color-sand-25: #fcfaf8;
+  --color-sand-50: #f9f4f1;
+  --color-sand-100: #f6ece4;
+  --color-sand-150: #f4e7dd;
+  --color-bark: #211217;
+  --color-sunlight: #fbf582;
+  --color-forest: #194b22;
+  --color-sky: #b9cfff;
+
+  /* Text colors */
+  --text-primary: #211217;
+  --text-secondary: #755760;
+  --text-tertiary: #8a7078;
+  --text-inverted: #f9f4f1;
+
+  /* Radius - desktop scale */
+  --radius-small: 16px;
+  --radius-medium: 20px;
+  --radius-large: 30px;
+  --radius-x-large: 40px;
+  --radius-2x-large: 60px;
+
+  /* Radius - mobile scale */
+  --radius-mobile-small: 10px;
+  --radius-mobile-medium: 16px;
+  --radius-mobile-large: 24px;
+  --radius-mobile-x-large: 32px;
+  --radius-mobile-2x-large: 48px;
+
+  /* Spacing scale */
+  --size-4: 4px;
+  --size-8: 8px;
+  --size-12: 12px;
+  --size-16: 16px;
+  --size-24: 24px;
+  --size-32: 32px;
+  --size-40: 40px;
+  --size-48: 48px;
+  --size-56: 56px;
+  --size-64: 64px;
+  --size-72: 72px;
+  --size-80: 80px;
+  --size-88: 88px;
+  --size-96: 96px;
+  --size-104: 104px;
+  --size-112: 112px;
+  --size-120: 120px;
+  --size-128: 128px;
+
+  /* Spacing — semantic scale */
+  --size-x-small: 24px;
+  --size-medium: 40px;
+  --size-large: 48px;
+  --size-x-large: 56px;
+  --size-2x-large: 72px;
+
+  /* Padding scale */
+  --padding-x-small: 8px;
+  --padding-small: 16px;
+  --padding-medium: 24px;
+  --padding-large: 32px;
+
+  /* Responsive page gutters (replaces fixed side padding at section level on large screens) */
+  --page-gutter-fluid: 16px;
+
+  /* Typography families */
+  --font-roca: "roca", "Times New Roman", serif;
+  --font-gotham: "gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Content measure */
+  --measure-hero: 800px;
+  --measure-nav: 1280px;
+  --measure-work-section: 1280px;
+  --measure-work-card: 1120px;
+  /* Narrative column for case study pages (body + hero title/media); fills to gutters below this width */
+  --measure-case-study-column: 800px;
+  --measure-shell-rest: var(--measure-work-section);
+
+  /* Page surface (behind elevated sand-25 UI) */
+  --background: var(--color-sand-100);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-gotham);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-gotham);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Lenis baseline styles: keep root height unconstrained for correct scroll limits. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Content max widths */
+.hero-headline-measure {
+  width: 100%;
+  max-width: var(--measure-hero);
+  margin-inline: auto;
+}
+
+.nav-measure {
+  width: 100%;
+  max-width: var(--measure-nav);
+  margin-inline: auto;
+}
+
+.work-section-measure {
+  width: 100%;
+  max-width: var(--measure-work-section);
+  margin-inline: auto;
+}
+
+.work-card-measure {
+  width: 100%;
+  max-width: var(--measure-work-card);
+  margin-inline: auto;
+}
+
+.case-study-shell {
+  width: 100%;
+  max-width: var(--measure-case-study-column);
+  margin-inline: auto;
+  font-family: var(--font-roca);
+  padding-block: var(--size-56);
+  padding-inline: 0;
+}
+
+.case-study-hero-outer {
+  width: 100%;
+  padding-inline: var(--page-gutter-fluid);
+}
+
+.case-study-hero-wrap {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
+
+.case-study-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--size-8);
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--text-secondary);
+}
+
+.case-study-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.case-study-link:hover {
+  text-decoration: underline;
+}
+
+.case-study-header {
+  margin-top: 0;
+}
+
+.case-study-hero {
+  position: relative;
+  border-radius: var(--radius-large);
+  background: var(--color-sand-25);
+  padding-block: var(--size-40);
+  padding-inline: var(--padding-large);
+}
+
+.case-study-hero-close {
+  position: absolute;
+  top: var(--size-16);
+  right: var(--size-16);
+  z-index: 2;
+  display: inline-flex;
+  height: 32px;
+  width: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-secondary) 70%, transparent);
+  color: var(--text-inverted);
+  font-family: var(--font-gotham);
+  font-size: 22px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.case-study-hero-media {
+  width: 100%;
+  max-width: var(--measure-case-study-column);
+  margin-inline: auto;
+}
+
+.case-study-hero-content {
+  width: 100%;
+  max-width: var(--measure-case-study-column);
+  margin-inline: auto;
+}
+
+.case-study-kicker {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.case-study-title {
+  margin: 0 0 var(--size-32);
+  font-family: var(--font-roca);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 58px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.case-study-summary {
+  margin-top: var(--size-16);
+  max-width: 75ch;
+  font-size: clamp(18px, 2.1vw, 24px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.case-study-tag-list {
+  margin-top: var(--size-24);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-8);
+  list-style: none;
+  padding: 0;
+}
+
+.case-study-tag {
+  border-radius: 999px;
+  border: 1px solid var(--color-sand-150);
+  background: var(--color-sand-50);
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.case-study-cover {
+  margin-top: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 240px;
+  max-height: min(52dvh, 500px);
+}
+
+.case-study-cover-image {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--color-sand-150);
+  object-fit: contain;
+  background: var(--color-sky);
+}
+
+.case-study-figure-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--color-sand-150);
+  object-fit: cover;
+}
+
+.case-study-metric-strip {
+  margin-top: var(--size-24);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-12);
+  width: 100%;
+}
+
+.case-study-inline-metrics {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-12);
+  width: 100%;
+}
+
+.case-study-metric-item,
+.case-study-inline-metric-item {
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: var(--radius-small);
+  background: var(--color-sky);
+  padding: var(--padding-medium);
+}
+
+.case-study-metric-item .case-study-metric-value,
+.case-study-inline-metric-item .case-study-inline-metric-value {
+  font-family: var(--font-roca);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 56px;
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.case-study-metric-item .case-study-metric-label,
+.case-study-inline-metric-item .case-study-inline-metric-label {
+  margin-top: var(--size-8);
+  font-family: var(--font-gotham);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.case-study-metric-item .case-study-metric-label:empty,
+.case-study-inline-metric-item .case-study-inline-metric-label:empty {
+  display: none;
+}
+
+.case-study-body {
+  margin-top: var(--size-40);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.case-study-section-heading,
+.case-study-section-divider {
+  font-family: var(--font-roca);
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 64px;
+  text-align: center;
+}
+
+.case-study-section-divider {
+  margin-block: var(--size-40);
+  width: 100%;
+  height: var(--size-72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.case-study-section-divider > p {
+  margin: 0;
+}
+
+.case-study-prose-section > .case-study-prose {
+  margin-top: 0;
+}
+
+.case-study-prose-section:first-child > .case-study-prose > .case-study-section-heading:first-child {
+  margin-top: 0;
+}
+
+.case-study-section-lead-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin-inline: auto;
+  border-radius: 999px;
+}
+
+.case-study-section-lead-image {
+  display: block;
+  border-radius: 999px;
+  object-fit: contain;
+}
+
+.case-study-section-lead-visual + .case-study-section-heading {
+  margin-top: 0;
+}
+
+.case-study-prose {
+  margin-top: var(--size-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-40);
+}
+
+.case-study-prose-header {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-24);
+}
+
+.case-study-prose-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-40);
+}
+
+.case-study-prose p:not([class]) {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-roca);
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 44px;
+  color: var(--text-secondary);
+}
+
+.case-study-prose li {
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.case-study-prose ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: var(--size-8);
+}
+
+.case-study-section-heading {
+  margin: 0;
+  margin-top: var(--size-24);
+  color: var(--text-primary);
+}
+
+.case-study-quote {
+  margin: 0;
+  border-left: 3px solid var(--color-sand-150);
+  padding: var(--size-12) var(--size-16);
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.case-study-figure {
+  margin: var(--size-8) 0 0;
+}
+
+.case-study-figure figcaption {
+  margin-top: var(--size-8);
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--text-tertiary);
+}
+
+.case-study-figure-placeholder {
+  width: 100%;
+  border-radius: var(--radius-medium);
+  border: 1px dashed var(--text-tertiary);
+  background: var(--color-sky);
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Solid brand fill — matches figure image slot proportions */
+.case-study-figure-solid {
+  width: 100%;
+  aspect-ratio: 1200 / 760;
+  border-radius: var(--radius-medium);
+  background: var(--color-sky);
+}
+
+@media (max-width: 768px) {
+  .case-study-hero {
+    border-radius: var(--radius-mobile-large);
+    padding-block: var(--size-32);
+    padding-inline: var(--padding-medium);
+  }
+
+  .case-study-cover {
+    min-height: 220px;
+    max-height: min(46dvh, 360px);
+  }
+
+  .case-study-shell {
+    padding-block: var(--size-32);
+  }
+
+  .case-study-metric-strip,
+  .case-study-inline-metrics {
+    flex-direction: column;
+  }
+
+  .case-study-metric-item,
+  .case-study-inline-metric-item {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .case-study-prose li {
+    font-size: 18px;
+  }
 }
