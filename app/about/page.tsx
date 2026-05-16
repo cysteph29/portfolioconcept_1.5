@@ -165,28 +165,32 @@ const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
 export default function AboutPage() {
   return (
     <main className="flex w-full flex-col items-center pb-[length:var(--size-40)] pt-[length:var(--size-40)]">
+      <section
+        aria-label="About introduction"
+        className="flex w-full flex-col items-center gap-[length:var(--size-32)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
+      >
+        <div className="shrink-0 overflow-hidden rounded-full">
+          <Image
+            src="/profilepicture.png"
+            alt="Portrait of Cyril Stephen"
+            width={152}
+            height={152}
+            priority
+            className="h-[152px] w-[152px] rounded-full object-cover"
+          />
+        </div>
+
+        <h1
+          className="hero-headline-measure text-center text-[96px] font-light leading-[96px] tracking-normal text-[color:var(--text-primary)]"
+          style={{ fontFamily: "var(--font-roca)" }}
+        >
+          {ABOUT_TITLE}
+        </h1>
+      </section>
+
       <section aria-label="About" className="w-full px-[length:var(--page-gutter-fluid)]">
         <div className="case-study-shell flex flex-col items-center">
-          <div className="flex w-full flex-col items-center gap-[length:var(--size-32)]">
-            <div className="shrink-0 overflow-hidden rounded-full">
-              <Image
-                src="/profilepicture.png"
-                alt="Portrait of Cyril Stephen"
-                width={152}
-                height={152}
-                priority
-              />
-            </div>
-
-            <h1
-              className="hero-headline-measure text-center text-[96px] font-light leading-[96px] tracking-normal text-[color:var(--text-primary)]"
-              style={{ fontFamily: "var(--font-roca)" }}
-            >
-              {ABOUT_TITLE}
-            </h1>
-          </div>
-
-          <div className="mt-[length:var(--size-56)] flex w-full flex-col">
+          <div className="flex w-full flex-col">
             {ABOUT_SECTIONS.map((section, index) => (
               <Fragment key={section.heading}>
                 <section

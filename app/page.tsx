@@ -12,7 +12,13 @@ export default function Home() {
         className="mt-[length:var(--size-40)] w-full px-[length:var(--page-gutter-fluid)]"
       >
         <div className="mx-auto w-full max-w-[length:var(--measure-shell-rest)] rounded-[length:var(--radius-x-large)] bg-[color:var(--color-sand-25)] px-[length:var(--padding-large)] py-[length:var(--size-80)]">
-          <WorkSection />
+          <WorkSection
+            coverVideoOverrides={{
+              "salesforce-trailhead": "/case-study-assets/projectcard-trailhead-v1.mov",
+              "axway-one": "/case-study-assets/projectcard-axway-v1.mov",
+              "the-ken": "/case-study-assets/projectcard-ken-v1.mov",
+            }}
+          />
         </div>
       </section>
       <section

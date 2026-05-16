@@ -6,6 +6,7 @@ interface WorkSectionProps {
   title?: string;
   excludeSlug?: string;
   limit?: number;
+  coverVideoOverrides?: Partial<Record<string, string>>;
 }
 
 const projectHighlights: Record<string, { stat: string; statDetail: string }> = {
@@ -27,6 +28,7 @@ export function WorkSection({
   title = "Work.",
   excludeSlug,
   limit,
+  coverVideoOverrides,
 }: WorkSectionProps) {
   const projects = getAllPublishedProjectFrontmatter()
     .filter((project) => project.slug !== excludeSlug)
@@ -48,8 +50,11 @@ export function WorkSection({
       </h2>
 
       <div className="flex w-full flex-col items-center gap-[length:var(--size-32)]">
-        {projects.map((project) => (
-          <RouteTransitionLink
+        {projects.map((project) => {
+          const cardVideo = coverVideoOverrides?.[project.slug] ?? project.coverVideo;
+
+          return (
+            <RouteTransitionLink
             key={project.title}
             href={project.href}
             className="project-transition-link work-card-measure block overflow-hidden rounded-[length:var(--radius-medium)] bg-[color:var(--color-sand-50)] text-[color:var(--text-primary)] no-underline"
@@ -57,7 +62,7 @@ export function WorkSection({
             <article>
               <div className="px-[length:var(--padding-large)] pt-[length:var(--padding-large)]">
                 <div className="relative w-full overflow-hidden rounded-[length:var(--radius-medium)] aspect-[16/9]">
-                  {project.coverVideo ? (
+                  {cardVideo ? (
                     <video
                       className="h-full w-full object-cover object-center"
                       autoPlay
@@ -66,7 +71,7 @@ export function WorkSection({
                       playsInline
                       preload="metadata"
                     >
-                      <source src={project.coverVideo} />
+                      <source src={cardVideo} />
                     </video>
                   ) : (
                     <Image
@@ -147,8 +152,9 @@ export function WorkSection({
                 </div>
               </div>
             </article>
-          </RouteTransitionLink>
-        ))}
+            </RouteTransitionLink>
+          );
+        })}
       </div>
     </div>
   );
