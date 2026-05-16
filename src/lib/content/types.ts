@@ -15,6 +15,7 @@ export interface ProjectFrontmatter {
   status: ProjectStatus;
   tags: string[];
   coverImage: string;
+  coverVideo?: string;
   metrics?: ProjectMetric[];
   published: boolean;
   featured: boolean;

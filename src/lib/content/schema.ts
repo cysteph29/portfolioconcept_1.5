@@ -51,6 +51,10 @@ export function isProjectFrontmatter(
   const hasValidMetrics =
     candidate.metrics === undefined || isMetricsArray(candidate.metrics);
 
+  const hasValidCoverVideo =
+    candidate.coverVideo === undefined ||
+    isNonEmptyString(candidate.coverVideo);
+
   return (
     isNonEmptyString(candidate.title) &&
     isNonEmptyString(candidate.slug) &&
@@ -61,6 +65,7 @@ export function isProjectFrontmatter(
     hasValidStatus &&
     isStringArray(candidate.tags) &&
     isNonEmptyString(candidate.coverImage) &&
+    hasValidCoverVideo &&
     hasValidMetrics &&
     isBoolean(candidate.published) &&
     isBoolean(candidate.featured) &&

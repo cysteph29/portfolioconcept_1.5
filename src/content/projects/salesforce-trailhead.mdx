@@ -3,13 +3,14 @@ export const metadata = {
     "An AI-powered re-engagement strategy Salesforce Trailhead's power users preferred over ChatGPT",
   slug: "salesforce-trailhead",
   summary:
-    "A one-column editorial case study that traces the problem, intervention, and outcomes of a new Trailhead support workflow.",
+    "A ten-month research and design partnership with Salesforce Trailhead, building an AI-powered assistant and adaptive dashboard to re-engage power users after certification.",
   role: "UX Research, Strategy, Prototyping",
   year: "2026",
   timeline: "2 weeks",
   status: "launched",
   tags: ["AI strategy", "Retention", "Learning platforms"],
   coverImage: "/mosaic-coin.svg",
+  coverVideo: "/case-study-assets/solve-answering.mp4",
   published: true,
   featured: true,
   sortOrder: 1,
@@ -20,16 +21,16 @@ export const metadata = {
     <>
       The Problem:
       <br />
-      Power Users of Salesforce Trailhead were disengaging with the platform.
+      Power users were leaving Trailhead for ChatGPT, YouTube, and Slack communities the moment they hit a real Salesforce problem at work.
     </>
   }
 >
 
-Salesforce Trailhead was built for the climb - learning, up skilling & getting certified.<br /><br />But once users became more competent and started solving real problems at work, their needs shifted from learning paths to real problems at work.
+Salesforce Trailhead was built for the climb - learning, upskilling & getting certified.<br /><br />But once users become more competent and are in work environments, their needs shifted from learning paths to real problems at work.
 
 <InlineMetrics
   metrics={[
-    { value: "45%", label: "supplemented Trailhead with ChatGPT, YouTube, and Slack" },
+    { value: "6 of 8", label: "power users preferred Solve over ChatGPT for Salesforce questions" },
     { value: "64%", label: "disengaged after hitting major milestones" },
     { value: "36%", label: "found recommendations not adaptive enough" },
   ]}
@@ -46,38 +47,38 @@ So they left for ChatGPT, YouTube, and Slack communities, where their needs were
     <>
       The Solution:
       <br />
-      We built two layers, working together — Trailhead Solve, and a Redesigned Dashboard.
+      We built two layers, working together.
     </>
   }
 >
 
-Trailhead Solve intercepts power users at the moment they'd otherwise open ChatGPT or Slack communities.
+Trailhead Solve intercepts power users at the moment they'd otherwise open ChatGPT or Slack communities.<br /><br />We built a RAG-powered assistant that takes a real Salesforce problem in plain language and returns a sourced answer linked back to Trailhead modules and docs.
 
-<Figure caption="Prototype v1 of embedded assistant with contextual prompts." />
+<Figure
+  videoSrc="/case-study-assets/solve-answering.mp4"
+  caption="Solve takes a question in plain language and returns a sourced answer."
+/>
 
-A RAG-powered assistant that takes a real Salesforce problem in plain language and returns a sourced answer linked back to Trailhead modules and docs.
+The redesigned dashboard picks up where Solve leaves off, surfacing recommendations shaped by each user's behavior on the platform.<br /><br />It learns from each user's Solve conversations to recommend what they should learn next, based on the gaps their own questions reveal.
 
-<Figure caption="Prototype v2 of recommendation and next-step behavior." />
+<Figure
+  src="/case-study-assets/solve-learningrecommendations.svg"
+  caption="Recommends what to learn next, based on the gaps each user's Solve questions reveal."
+/>
 
-<PullQuote>
-  If the user is still stuck, Solve drafts a Trailblazer Community post for them, pre-filled and ready to publish.
-</PullQuote>
+It also surfaces community questions they're uniquely qualified to answer, giving power users a reason to engage inside Trailhead as contributors, not just learners.
 
-<Figure caption="Prototype v3 detailing in-flow progression guidance." />
-
-The redesigned dashboard picks up where Solve leaves off. It reads each user's absence pattern to surface the one thing most likely to pull them back.<br /><br />It surfaces certification maintenance deadlines, learning recommendations based on conversations with Solve, and community questions they're uniquely qualified to answer.
-
-<InlineMetrics
-  metrics={[
-    { value: "Prototype / Asset Slot", label: "" },
-    { value: "Prototype / Asset Slot", label: "" },
-    { value: "Prototype / Asset Slot", label: "" },
-  ]}
+<Figure
+  src="/case-study-assets/solve-communityquestions.svg"
+  caption="Surfaces community questions they're uniquely qualified to answer based on a user's profile."
 />
 
 It also addresses something power users said in nearly every interview:<br /><br />*"Trailhead's learning content is just too basic for where I'm at in my career."*<br /><br />We introduced AI-generated learning paths shaped by where the user actually is and what jobs at their level are hiring for.
 
-<Figure caption="Prototype video — dashboard and AI-generated learning paths." />
+<Figure
+  videoSrc="/case-study-assets/solve-customtrailmix.mp4"
+  caption="Learning paths shaped by where the user is and what jobs at their level are hiring for."
+/>
 
 </SolutionSection>
 
@@ -97,8 +98,8 @@ Each user took a real Salesforce problem from their own work, ran it through Cha
 
 <InlineMetrics
   metrics={[
-    { value: "45%", label: "supplemented Trailhead with ChatGPT, YouTube, and Slack" },
-    { value: "64%", label: "disengaged after hitting major milestones" },
+    { value: "6 of 8", label: "said they'd use Solve over ChatGPT for Salesforce questions" },
+    { value: "4.5/5", label: "average confidence in Solve's answers" },
   ]}
 />
 

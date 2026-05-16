@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getAllPublishedProjectFrontmatter } from "@/src/lib/content/projects";
+import { RouteTransitionLink } from "@/src/components/RouteTransitionLink";
 
 export default function WorkPage() {
   const projects = getAllPublishedProjectFrontmatter();
@@ -17,10 +17,10 @@ export default function WorkPage() {
 
           <div className="flex flex-col gap-[length:var(--size-16)]">
             {projects.map((project) => (
-              <Link
+              <RouteTransitionLink
                 key={project.slug}
                 href={`/work/${project.slug}`}
-                className="rounded-[length:var(--radius-medium)] border border-[color:var(--color-sand-150)] bg-[color:var(--color-sand-50)] p-[length:var(--padding-medium)] no-underline transition-colors hover:bg-[color:var(--color-sand-25)]"
+                className="project-transition-link rounded-[length:var(--radius-medium)] border border-[color:var(--color-sand-150)] bg-[color:var(--color-sand-50)] p-[length:var(--padding-medium)] no-underline transition-colors hover:bg-[color:var(--color-sand-25)]"
               >
                 <p className="text-[14px] uppercase tracking-[0.08em] text-[color:var(--text-secondary)]">
                   {project.year}
@@ -31,7 +31,7 @@ export default function WorkPage() {
                 <p className="mt-[length:var(--size-8)] text-[18px] leading-[26px] text-[color:var(--text-secondary)]">
                   {project.summary}
                 </p>
-              </Link>
+              </RouteTransitionLink>
             ))}
           </div>
         </div>

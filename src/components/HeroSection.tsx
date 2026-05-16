@@ -16,12 +16,12 @@ export function HeroSection() {
       /> */}
       <div className="shrink-0 overflow-hidden rounded-full">
         <Image
-          src="/test2.svg"
-          alt=""
+          src="/profilepicture.png"
+          alt="Portrait of Cyril Stephen"
           width={152}
           height={152}
-          aria-hidden="true"
           priority
+          className="h-[152px] w-[152px] rounded-full object-cover"
         />
       </div>
       <p

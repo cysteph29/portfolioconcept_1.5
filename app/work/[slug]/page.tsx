@@ -28,6 +28,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       title={project.frontmatter.title}
       slug={slug}
       coverImage={project.frontmatter.coverImage}
+      coverVideo={project.frontmatter.coverVideo}
       metrics={project.frontmatter.metrics}
     >
       <Content components={caseStudyMDXComponents} />

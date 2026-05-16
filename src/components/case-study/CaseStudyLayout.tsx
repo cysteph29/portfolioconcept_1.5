@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { FooterSection } from "@/src/components/FooterSection";
 import { WorkSection } from "@/src/components/WorkSection";
+import { CoverVideo } from "@/src/components/case-study/CoverVideo";
+import { RevealOnScroll } from "@/src/components/case-study/RevealOnScroll";
 
 export interface CaseStudyMetric {
   value: string;
@@ -13,6 +15,7 @@ interface CaseStudyLayoutProps {
   title: string;
   slug: string;
   coverImage?: string;
+  coverVideo?: string;
   metrics?: CaseStudyMetric[];
   children: ReactNode;
 }
@@ -21,11 +24,12 @@ export function CaseStudyLayout({
   title,
   slug,
   coverImage,
+  coverVideo,
   metrics = [],
   children,
 }: CaseStudyLayoutProps) {
   return (
-    <main className="flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
+    <main className="case-study-page-entry flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
       <section className="case-study-hero-outer">
         <header className="case-study-header">
           <div className="case-study-hero-wrap">
@@ -42,7 +46,15 @@ export function CaseStudyLayout({
                 <h1 className="case-study-title">{title}</h1>
               </div>
 
-              {coverImage ? (
+              {coverVideo ? (
+                <div className="case-study-hero-media">
+                  <div className="case-study-cover">
+                    <CoverVideo src={coverVideo} />
+                  </div>
+                </div>
+              ) : null}
+
+              {!coverVideo && coverImage ? (
                 <div className="case-study-hero-media">
                   <div className="case-study-cover">
                     <Image
@@ -67,7 +79,11 @@ export function CaseStudyLayout({
           className="case-study-shell"
           style={{ backgroundColor: "transparent", borderRadius: 0 }}
         >
-          {metrics.length > 0 ? <CaseStudyMetricStrip metrics={metrics} /> : null}
+          {metrics.length > 0 ? (
+            <RevealOnScroll className="case-study-scroll-reveal">
+              <CaseStudyMetricStrip metrics={metrics} />
+            </RevealOnScroll>
+          ) : null}
 
           <div className="case-study-body">{children}</div>
         </article>
@@ -77,12 +93,16 @@ export function CaseStudyLayout({
         aria-label="Other work"
         className="mt-[length:var(--size-40)] w-full px-[length:var(--page-gutter-fluid)]"
       >
-        <div className="mx-auto w-full max-w-[length:var(--measure-shell-rest)] rounded-[length:var(--radius-x-large)] bg-[color:var(--color-sand-25)] px-[length:var(--padding-large)] py-[length:var(--size-80)]">
-          <WorkSection title="Other work" excludeSlug={slug} limit={2} />
-        </div>
+        <RevealOnScroll className="case-study-scroll-reveal">
+          <div className="mx-auto w-full max-w-[length:var(--measure-shell-rest)] rounded-[length:var(--radius-x-large)] bg-[color:var(--color-sand-25)] px-[length:var(--padding-large)] py-[length:var(--size-80)]">
+            <WorkSection title="Other work" excludeSlug={slug} limit={2} />
+          </div>
+        </RevealOnScroll>
       </section>
 
-      <FooterSection />
+      <RevealOnScroll className="case-study-scroll-reveal w-full">
+        <FooterSection />
+      </RevealOnScroll>
     </main>
   );
 }
@@ -111,30 +131,32 @@ export function CaseStudyProseSection({
   const leadH = leadVisual?.height ?? 120;
 
   return (
-    <section className="case-study-prose-section" aria-label={ariaLabel}>
-      <div className="case-study-prose">
-        <div className="case-study-prose-header">
-          {leadVisual ? (
-            <div
-              className="case-study-section-lead-visual"
-              style={{ width: leadW, height: leadH }}
-            >
-              <Image
-                src={leadVisual.src}
-                alt={leadVisual.alt}
-                width={leadW}
-                height={leadH}
-                className="case-study-section-lead-image"
-                sizes={`${leadW}px`}
+    <RevealOnScroll className="case-study-scroll-reveal">
+      <section className="case-study-prose-section" aria-label={ariaLabel}>
+        <div className="case-study-prose">
+          <div className="case-study-prose-header">
+            {leadVisual ? (
+              <div
+                className="case-study-section-lead-visual"
                 style={{ width: leadW, height: leadH }}
-              />
-            </div>
-          ) : null}
-          <CaseStudySectionHeading>{title}</CaseStudySectionHeading>
+              >
+                <Image
+                  src={leadVisual.src}
+                  alt={leadVisual.alt}
+                  width={leadW}
+                  height={leadH}
+                  className="case-study-section-lead-image"
+                  sizes={`${leadW}px`}
+                  style={{ width: leadW, height: leadH }}
+                />
+              </div>
+            ) : null}
+            <CaseStudySectionHeading>{title}</CaseStudySectionHeading>
+          </div>
+          <div className="case-study-prose-content">{children}</div>
         </div>
-        <div className="case-study-prose-content">{children}</div>
-      </div>
-    </section>
+      </section>
+    </RevealOnScroll>
   );
 }
 
@@ -208,43 +230,76 @@ export function CaseStudyFigure({
   alt,
   caption,
   solidBlue,
+  videoSrc,
+  videoPlaceholder,
 }: {
   src?: string;
   alt?: string;
   caption?: string;
   /** Filled rectangle using brand sky blue (`--color-sky`), no image. */
   solidBlue?: boolean;
+  /** When set, renders a `<video>` element (otherwise falls back to image / placeholder). */
+  videoSrc?: string;
+  /** Dashed placeholder labeled for an upcoming prototype recording (no file yet). */
+  videoPlaceholder?: boolean;
 }) {
+  let figureContent: ReactNode;
+
   if (solidBlue) {
-    return (
-      <figure className="case-study-figure">
+    figureContent = (
+      <>
         <div className="case-study-figure-solid" aria-hidden />
         {caption ? <figcaption>{caption}</figcaption> : null}
-      </figure>
+      </>
     );
-  }
-
-  if (!src) {
-    return (
-      <figure className="case-study-figure">
+  } else if (videoSrc) {
+    figureContent = (
+      <>
+        <video
+          className="case-study-figure-video"
+          controls
+          playsInline
+          preload="metadata"
+        >
+          <source src={videoSrc} />
+        </video>
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </>
+    );
+  } else if (videoPlaceholder) {
+    figureContent = (
+      <>
+        <div className="case-study-figure-placeholder">Prototype video</div>
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </>
+    );
+  } else if (!src) {
+    figureContent = (
+      <>
         <div className="case-study-figure-placeholder">Prototype / asset slot</div>
         {caption ? <figcaption>{caption}</figcaption> : null}
-      </figure>
+      </>
+    );
+  } else {
+    figureContent = (
+      <>
+        <Image
+          src={src}
+          alt={alt ?? "Case study visual"}
+          width={1200}
+          height={760}
+          className="case-study-figure-image"
+          sizes="(min-width: 832px) 800px, calc(100vw - 32px)"
+        />
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </>
     );
   }
 
   return (
-    <figure className="case-study-figure">
-      <Image
-        src={src}
-        alt={alt ?? "Case study visual"}
-        width={1200}
-        height={760}
-        className="case-study-figure-image"
-        sizes="(min-width: 832px) 800px, calc(100vw - 32px)"
-      />
-      {caption ? <figcaption>{caption}</figcaption> : null}
-    </figure>
+    <RevealOnScroll className="case-study-scroll-reveal">
+      <figure className="case-study-figure">{figureContent}</figure>
+    </RevealOnScroll>
   );
 }
 
@@ -274,24 +329,28 @@ export function CaseStudyQuote({ children }: { children: ReactNode }) {
 
 export function InlineMetrics({ metrics }: { metrics: CaseStudyMetric[] }) {
   return (
-    <section className="case-study-inline-metrics" aria-label="Inline metrics">
-      {metrics.map((metric, index) => (
-        <div
-          key={`${metric.value}-${metric.label}-${index}`}
-          className="case-study-inline-metric-item"
-        >
-          <p className="case-study-inline-metric-value">{metric.value}</p>
-          <p className="case-study-inline-metric-label">{metric.label}</p>
-        </div>
-      ))}
-    </section>
+    <RevealOnScroll className="case-study-scroll-reveal">
+      <section className="case-study-inline-metrics" aria-label="Inline metrics">
+        {metrics.map((metric, index) => (
+          <div
+            key={`${metric.value}-${metric.label}-${index}`}
+            className="case-study-inline-metric-item"
+          >
+            <p className="case-study-inline-metric-value">{metric.value}</p>
+            <p className="case-study-inline-metric-label">{metric.label}</p>
+          </div>
+        ))}
+      </section>
+    </RevealOnScroll>
   );
 }
 
 export function CaseStudySectionDivider() {
   return (
-    <div className="case-study-section-divider" aria-hidden="true">
-      <p>~</p>
-    </div>
+    <RevealOnScroll className="case-study-scroll-reveal">
+      <div className="case-study-section-divider" aria-hidden="true">
+        <p>~</p>
+      </div>
+    </RevealOnScroll>
   );
 }

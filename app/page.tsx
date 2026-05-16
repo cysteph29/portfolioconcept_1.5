@@ -23,7 +23,9 @@ export default function Home() {
           <ExperienceSection />
         </div>
       </section>
-      <FooterSection />
+      <div id="contact" className="w-full">
+        <FooterSection />
+      </div>
     </main>
   );
 }

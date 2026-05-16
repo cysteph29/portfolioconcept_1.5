@@ -44,7 +44,10 @@ for (const [slug, entry] of Object.entries(registry)) {
 }
 
 export function getProjectBySlug(slug: string): ProjectRegistryEntry | null {
-  return registry[slug] ?? null;
+  if (slug in registry) {
+    return registry[slug as keyof typeof registry];
+  }
+  return null;
 }
 
 export function getAllProjectSlugs(): string[] {

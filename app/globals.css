@@ -158,6 +158,17 @@ html.lenis body {
   margin-inline: auto;
 }
 
+.work-card-cover-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-medium);
+}
+
+.project-transition-link {
+  position: relative;
+}
+
 .case-study-shell {
   width: 100%;
   max-width: var(--measure-case-study-column);
@@ -165,6 +176,10 @@ html.lenis body {
   font-family: var(--font-roca);
   padding-block: var(--size-56);
   padding-inline: 0;
+}
+
+.case-study-page-entry {
+  animation: caseStudyPageEntry 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .case-study-hero-outer {
@@ -296,9 +311,15 @@ html.lenis body {
   width: 100%;
   height: 100%;
   border-radius: var(--radius-medium);
-  border: 1px solid var(--color-sand-150);
-  object-fit: contain;
-  background: var(--color-sky);
+  object-fit: cover;
+}
+
+.case-study-cover-video {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-medium);
+  object-fit: cover;
+  display: block;
 }
 
 .case-study-figure-image {
@@ -306,6 +327,15 @@ html.lenis body {
   height: auto;
   border-radius: var(--radius-medium);
   border: 1px solid var(--color-sand-150);
+  object-fit: cover;
+}
+
+.case-study-figure-video {
+  width: 100%;
+  aspect-ratio: 1200 / 760;
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--color-sand-150);
+  background: transparent;
   object-fit: cover;
 }
 
@@ -481,10 +511,13 @@ html.lenis body {
 }
 
 .case-study-figure figcaption {
+  display: block;
+  width: 100%;
   margin-top: var(--size-8);
   font-size: 14px;
   line-height: 18px;
   color: var(--text-tertiary);
+  text-align: center !important;
 }
 
 .case-study-figure-placeholder {
@@ -508,6 +541,31 @@ html.lenis body {
   aspect-ratio: 1200 / 760;
   border-radius: var(--radius-medium);
   background: var(--color-sky);
+}
+
+.case-study-scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.case-study-scroll-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes caseStudyPageEntry {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -539,5 +597,23 @@ html.lenis body {
 
   .case-study-prose li {
     font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study-page-entry {
+    animation: none;
+  }
+
+  .case-study-scroll-reveal,
+  .case-study-scroll-reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .project-transition-link {
+    transition: none;
   }
 }

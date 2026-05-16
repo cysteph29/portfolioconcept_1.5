@@ -1,5 +1,6 @@
-import Link from "next/link";
+import Image from "next/image";
 import { getAllPublishedProjectFrontmatter } from "@/src/lib/content/projects";
+import { RouteTransitionLink } from "@/src/components/RouteTransitionLink";
 
 interface WorkSectionProps {
   title?: string;
@@ -9,16 +10,16 @@ interface WorkSectionProps {
 
 const projectHighlights: Record<string, { stat: string; statDetail: string }> = {
   "salesforce-trailhead": {
-    stat: "45%",
-    statDetail: "Supplemented Trailhead with ChatGPT, YouTube, and Slack",
+    stat: "6 of 8",
+    statDetail: "Power users preferred Solve over ChatGPT for Salesforce questions",
   },
   "axway-one": {
     stat: "67%",
-    statDetail: "Reduction in invoice resolution time",
+    statDetail: "Reduction in invoice diagnosis time",
   },
   "the-ken": {
     stat: "5.6%",
-    statDetail: "Lift in subscription conversion rate",
+    statDetail: "Lift in subscription conversions",
   },
 };
 
@@ -48,14 +49,35 @@ export function WorkSection({
 
       <div className="flex w-full flex-col items-center gap-[length:var(--size-32)]">
         {projects.map((project) => (
-          <Link
+          <RouteTransitionLink
             key={project.title}
             href={project.href}
-            className="work-card-measure block overflow-hidden rounded-[length:var(--radius-medium)] bg-[color:var(--color-sand-50)] text-[color:var(--text-primary)] no-underline"
+            className="project-transition-link work-card-measure block overflow-hidden rounded-[length:var(--radius-medium)] bg-[color:var(--color-sand-50)] text-[color:var(--text-primary)] no-underline"
           >
             <article>
               <div className="px-[length:var(--padding-large)] pt-[length:var(--padding-large)]">
-                <div className="h-[420px] w-full rounded-[length:var(--radius-medium)] bg-[color:var(--color-sky)]" />
+                <div className="relative w-full overflow-hidden rounded-[length:var(--radius-medium)] aspect-[16/9]">
+                  {project.coverVideo ? (
+                    <video
+                      className="h-full w-full object-cover object-center"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                    >
+                      <source src={project.coverVideo} />
+                    </video>
+                  ) : (
+                    <Image
+                      src={project.coverImage}
+                      alt={project.title}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(min-width: 1280px) 1184px, calc(100vw - 64px)"
+                    />
+                  )}
+                </div>
               </div>
 
               <div className="p-[length:var(--padding-large)]">
@@ -125,7 +147,7 @@ export function WorkSection({
                 </div>
               </div>
             </article>
-          </Link>
+          </RouteTransitionLink>
         ))}
       </div>
     </div>

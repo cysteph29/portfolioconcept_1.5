@@ -58,7 +58,6 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     if (
       previousPathname &&
       previousPathname !== pathname &&
-      isCaseStudyRoute(previousPathname) &&
       isCaseStudyRoute(pathname)
     ) {
       requestAnimationFrame(() => {
