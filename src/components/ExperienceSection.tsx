@@ -1,48 +1,50 @@
+import Image from "next/image";
+
 const experiences = [
   {
     title: "Salesforce Trailhead",
-    placeholderLabel: "SF",
+    logoSrc: "/logo-saleforce.svg",
     description:
       "Co-leading strategy and product design for Trailhead, identifying engagement opportunities to improve retention among power users post-milestone completion.",
     dates: "Aug 25' — May 26'",
   },
   {
     title: "Axway E-Invoicing",
-    placeholderLabel: "AX",
+    logoSrc: "/logo-axway.svg",
     description:
       "Led end-to-end design from early discovery through hand-off as the sole designer for the 'e-Invoicing' compliance service, a regulated enterprise B2B FinTech product.",
     dates: "June 25' — Aug 25'",
   },
   {
     title: "The Ken (Via Chariot)",
-    placeholderLabel: "TK",
+    logoSrc: "/logo-theken.svg",
     description:
       "Collaborated with C-suite, product, and engineering on growth, conversion, and retention projects for The Ken, a business news publication with 5M+ global readers and 25,000+ paid subscribers.",
     dates: "March 24' — July 24'",
   },
   {
     title: "Intentionally Designed Solutions",
-    placeholderLabel: "IDS",
+    logoSrc: "/logo-ids.svg",
     description:
       "Delivered 0-to-1 product design, alongside brand and marketing design, for 3 interconnected products (a smart home device catalog, mobile app and CMS).",
     dates: "March 24' — July 24'",
   },
   {
     title: "Marketing Design",
-    placeholderLabel: "IU",
+    logoSrc: "/logo-iu.svg",
     description:
       "Brand and marketing design for digital and print touchpoints, campaign visuals, and stakeholder-facing materials.",
     dates: "March 24' — July 24'",
   },
 ] as const;
 
-function LogoPlaceholder({ label }: { label: string }) {
+function ExperienceLogo({ src }: { src: string }) {
   return (
     <div
-      className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[color:var(--color-sand-100)] text-[11px] font-medium uppercase tracking-[0.04em] text-[color:var(--text-secondary)]"
+      className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-[color:var(--color-sand-100)]"
       aria-hidden
     >
-      {label}
+      <Image src={src} alt="" width={40} height={40} className="h-[40px] w-[40px]" />
     </div>
   );
 }
@@ -73,7 +75,7 @@ export function ExperienceSection() {
             <div key={item.title} className={rowPadding || undefined}>
               <div className="flex flex-wrap items-start justify-between gap-x-[length:var(--size-24)] gap-y-[length:var(--size-8)]">
                 <div className="flex min-w-0 flex-1 items-start gap-[length:var(--size-24)]">
-                  <LogoPlaceholder label={item.placeholderLabel} />
+                  <ExperienceLogo src={item.logoSrc} />
                   <div className="flex min-w-0 flex-1 flex-col gap-[length:var(--size-8)]">
                     <h3
                       className="text-[36px] font-medium leading-[42px] text-[color:var(--text-primary)]"
