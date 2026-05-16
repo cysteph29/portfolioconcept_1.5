@@ -6,21 +6,21 @@ const experiences = [
     logoSrc: "/logo-saleforce.svg",
     description:
       "Co-leading strategy and product design for Trailhead, identifying engagement opportunities to improve retention among power users post-milestone completion.",
-    dates: "Aug 25' — May 26'",
+    dates: "August 25' — May 26'",
   },
   {
     title: "Axway E-Invoicing",
     logoSrc: "/logo-axway.svg",
     description:
       "Led end-to-end design from early discovery through hand-off as the sole designer for the 'e-Invoicing' compliance service, a regulated enterprise B2B FinTech product.",
-    dates: "June 25' — Aug 25'",
+    dates: "June 25' — August 25'",
   },
   {
     title: "The Ken (Via Chariot)",
     logoSrc: "/logo-theken.svg",
     description:
       "Collaborated with C-suite, product, and engineering on growth, conversion, and retention projects for The Ken, a business news publication with 5M+ global readers and 25,000+ paid subscribers.",
-    dates: "March 24' — July 24'",
+    dates: "March 23' — December 23'",
   },
   {
     title: "Intentionally Designed Solutions",
@@ -34,7 +34,7 @@ const experiences = [
     logoSrc: "/logo-iu.svg",
     description:
       "Brand and marketing design for digital and print touchpoints, campaign visuals, and stakeholder-facing materials.",
-    dates: "March 24' — July 24'",
+    dates: "February 25' - Present",
   },
 ] as const;
 
