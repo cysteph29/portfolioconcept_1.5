@@ -42,10 +42,7 @@ export function WorkSection({
 
   return (
     <div className="flex w-full flex-col items-center gap-[length:var(--size-48)]">
-      <h2
-        className="text-center text-[96px] font-light leading-[96px] tracking-normal text-[color:var(--text-primary)]"
-        style={{ fontFamily: "var(--font-roca)" }}
-      >
+      <h2 className="type-h1 text-center text-[color:var(--text-primary)]">
         {title}
       </h2>
 
@@ -86,22 +83,17 @@ export function WorkSection({
               </div>
 
               <div className="p-[length:var(--padding-large)]">
-                <div className="grid w-full grid-cols-1 gap-[length:var(--size-16)] md:grid-cols-[minmax(0,65fr)_minmax(240px,35fr)] md:items-stretch md:gap-[length:var(--size-40)]">
-                  <div className="min-w-0">
-                    <h3
-                      className="text-[36px] font-medium leading-[42px] text-[color:var(--text-primary)]"
-                      style={{ fontFamily: "var(--font-gotham)" }}
-                    >
+                <div className="grid w-full grid-cols-1 gap-[length:var(--size-16)]">
+                  <div className="work-card-copy-measure min-w-0">
+                    <h3 className="type-h2 text-[color:var(--text-primary)]">
                       {project.title}
                     </h3>
-                    <p
-                      className="mt-[length:var(--size-12)] text-[24px] font-normal leading-[32px] text-[color:var(--text-primary)]"
-                      style={{ fontFamily: "var(--font-gotham)" }}
-                    >
+                    <p className="type-p1 mt-[length:var(--size-12)] text-[color:var(--text-secondary)]">
                       {project.summary}
                     </p>
                   </div>
 
+                  {/* Project stat cards are hidden for now, but left here in case they come back.
                   <div className="flex w-full flex-col justify-between rounded-[length:var(--radius-medium)] bg-[color:var(--color-sand-25)] p-[length:var(--padding-medium)] md:h-full">
                     <p
                       className="text-[48px] font-light leading-[56px] text-[color:var(--text-primary)]"
@@ -116,35 +108,24 @@ export function WorkSection({
                       {project.statDetail}
                     </p>
                   </div>
+                  */}
                 </div>
 
                 <div className="mt-[length:var(--size-40)] border-t border-dashed border-[color:var(--text-tertiary)] pt-[length:var(--size-40)]">
                   <div className="flex flex-row flex-wrap items-start gap-[length:var(--size-24)]">
                     <div className="flex w-max max-w-full flex-col">
-                      <p
-                        className="text-[16px] font-medium uppercase leading-[20px] tracking-[0.06em] text-[color:var(--text-secondary)]"
-                        style={{ fontFamily: "var(--font-gotham)" }}
-                      >
+                      <p className="type-h4 uppercase tracking-[0.06em] text-[color:var(--text-secondary)]">
                         Timeline
                       </p>
-                      <p
-                        className="mt-[length:var(--size-8)] text-[24px] font-normal leading-[32px] text-[color:var(--text-primary)]"
-                        style={{ fontFamily: "var(--font-gotham)" }}
-                      >
+                      <p className="type-h3 mt-[length:var(--size-8)] text-[color:var(--text-primary)]">
                         {project.timeline}
                       </p>
                     </div>
                     <div className="flex w-max max-w-full flex-col">
-                      <p
-                        className="text-[16px] font-medium uppercase leading-[20px] tracking-[0.06em] text-[color:var(--text-secondary)]"
-                        style={{ fontFamily: "var(--font-gotham)" }}
-                      >
+                      <p className="type-h4 uppercase tracking-[0.06em] text-[color:var(--text-secondary)]">
                         Role
                       </p>
-                      <p
-                        className="mt-[length:var(--size-8)] text-[24px] font-normal leading-[32px] text-[color:var(--text-primary)]"
-                        style={{ fontFamily: "var(--font-gotham)" }}
-                      >
+                      <p className="type-h3 mt-[length:var(--size-8)] text-[color:var(--text-primary)]">
                         {project.role}
                       </p>
                     </div>

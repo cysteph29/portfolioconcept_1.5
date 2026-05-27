@@ -173,10 +173,10 @@ export default function AboutPage() {
           <Image
             src="/profilepicture.png"
             alt="Portrait of Cyril Stephen"
-            width={152}
-            height={152}
+            width={120}
+            height={120}
             priority
-            className="h-[152px] w-[152px] rounded-full object-cover"
+            className="h-[120px] w-[120px] rounded-full object-cover"
           />
         </div>
 

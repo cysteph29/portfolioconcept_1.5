@@ -52,10 +52,7 @@ function ExperienceLogo({ src }: { src: string }) {
 export function ExperienceSection() {
   return (
     <div className="flex w-full flex-col items-center gap-[length:var(--size-48)]">
-      <h2
-        className="text-center text-[96px] font-light leading-[96px] tracking-normal text-[color:var(--text-primary)]"
-        style={{ fontFamily: "var(--font-roca)" }}
-      >
+      <h2 className="type-h1 text-center text-[color:var(--text-primary)]">
         Experience.
       </h2>
 
@@ -77,24 +74,15 @@ export function ExperienceSection() {
                 <div className="flex min-w-0 flex-1 items-start gap-[length:var(--size-24)]">
                   <ExperienceLogo src={item.logoSrc} />
                   <div className="flex min-w-0 flex-1 flex-col gap-[length:var(--size-8)]">
-                    <h3
-                      className="text-[36px] font-medium leading-[42px] text-[color:var(--text-primary)]"
-                      style={{ fontFamily: "var(--font-gotham)" }}
-                    >
+                    <h3 className="type-h2 text-[color:var(--text-primary)]">
                       {item.title}
                     </h3>
-                    <p
-                      className="text-[24px] font-normal leading-[32px] text-[color:var(--text-primary)]"
-                      style={{ fontFamily: "var(--font-gotham)" }}
-                    >
+                    <p className="type-p1 w-full self-start text-[color:var(--text-secondary)] md:w-[80%] md:max-w-[80%]">
                       {item.description}
                     </p>
                   </div>
                 </div>
-                <p
-                  className="shrink-0 text-[16px] font-medium leading-[20px] text-[color:var(--text-secondary)]"
-                  style={{ fontFamily: "var(--font-gotham)" }}
-                >
+                <p className="type-h4 shrink-0 text-[color:var(--text-secondary)]">
                   {item.dates}
                 </p>
               </div>

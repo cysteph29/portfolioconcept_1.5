@@ -25,10 +25,10 @@ export default function WorkPage() {
                 <p className="text-[14px] uppercase tracking-[0.08em] text-[color:var(--text-secondary)]">
                   {project.year}
                 </p>
-                <h2 className="mt-[length:var(--size-8)] text-[30px] leading-[36px] text-[color:var(--text-primary)]">
+                <h2 className="type-h2 mt-[length:var(--size-8)] text-[color:var(--text-primary)]">
                   {project.title}
                 </h2>
-                <p className="mt-[length:var(--size-8)] text-[18px] leading-[26px] text-[color:var(--text-secondary)]">
+                <p className="type-p1 mt-[length:var(--size-8)] text-[color:var(--text-secondary)]">
                   {project.summary}
                 </p>
               </RouteTransitionLink>

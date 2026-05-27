@@ -43,7 +43,9 @@ export function CaseStudyLayout({
               </Link>
 
               <div className="case-study-hero-content">
-                <h1 className="case-study-title">{title}</h1>
+                <div className="case-study-hero-copy-measure">
+                  <h1 className="case-study-title">{title}</h1>
+                </div>
               </div>
 
               {coverVideo ? (
@@ -127,8 +129,8 @@ export function CaseStudyProseSection({
   leadVisual?: { src: string; alt: string; width?: number; height?: number };
   children: ReactNode;
 }) {
-  const leadW = leadVisual?.width ?? 120;
-  const leadH = leadVisual?.height ?? 120;
+  const leadW = leadVisual?.width ?? 72;
+  const leadH = leadVisual?.height ?? 72;
 
   return (
     <RevealOnScroll className="case-study-scroll-reveal">
@@ -176,8 +178,8 @@ export function CaseStudyProblemSection({
       leadVisual={{
         src: "/final_problem.svg",
         alt: "",
-        width: 120,
-        height: 120,
+        width: 72,
+        height: 72,
       }}
     >
       {children}
@@ -196,8 +198,8 @@ export function CaseStudySolutionSection({
       leadVisual={{
         src: "/final_solution.svg",
         alt: "",
-        width: 120,
-        height: 120,
+        width: 72,
+        height: 72,
       }}
     >
       {children}
@@ -216,8 +218,8 @@ export function CaseStudyOutcomeSection({
       leadVisual={{
         src: "/final_outcome.svg",
         alt: "",
-        width: 120,
-        height: 120,
+        width: 72,
+        height: 72,
       }}
     >
       {children}
@@ -249,7 +251,7 @@ export function CaseStudyFigure({
     figureContent = (
       <>
         <div className="case-study-figure-solid" aria-hidden />
-        {caption ? <figcaption>{caption}</figcaption> : null}
+        {caption ? <figcaption className="type-p2">{caption}</figcaption> : null}
       </>
     );
   } else if (videoSrc) {
@@ -263,21 +265,21 @@ export function CaseStudyFigure({
         >
           <source src={videoSrc} />
         </video>
-        {caption ? <figcaption>{caption}</figcaption> : null}
+        {caption ? <figcaption className="type-p2">{caption}</figcaption> : null}
       </>
     );
   } else if (videoPlaceholder) {
     figureContent = (
       <>
         <div className="case-study-figure-placeholder">Prototype video</div>
-        {caption ? <figcaption>{caption}</figcaption> : null}
+        {caption ? <figcaption className="type-p2">{caption}</figcaption> : null}
       </>
     );
   } else if (!src) {
     figureContent = (
       <>
         <div className="case-study-figure-placeholder">Prototype / asset slot</div>
-        {caption ? <figcaption>{caption}</figcaption> : null}
+        {caption ? <figcaption className="type-p2">{caption}</figcaption> : null}
       </>
     );
   } else {
@@ -291,7 +293,7 @@ export function CaseStudyFigure({
           className="case-study-figure-image"
           sizes="(min-width: 832px) 800px, calc(100vw - 32px)"
         />
-        {caption ? <figcaption>{caption}</figcaption> : null}
+        {caption ? <figcaption className="type-p2">{caption}</figcaption> : null}
       </>
     );
   }

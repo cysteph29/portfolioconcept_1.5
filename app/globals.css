@@ -68,14 +68,39 @@
   --page-gutter-fluid: 16px;
 
   /* Typography families */
-  --font-roca: "roca", "Times New Roman", serif;
-  --font-gotham: "gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-new-spirit: "new-spirit", "Times New Roman", serif;
+  --font-inter: var(--font-inter-google), "Inter", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  /* Backward-compatible aliases for existing styles */
+  --font-roca: var(--font-new-spirit);
+  --font-gotham: var(--font-inter);
+
+  /* Type scale */
+  --type-h1-size: 52px;
+  --type-h1-line: 58px;
+  --type-h1-weight: 500;
+  --type-h2-size: 28px;
+  --type-h2-line: 34px;
+  --type-h2-weight: 500;
+  --type-h3-size: 24px;
+  --type-h3-line: 32px;
+  --type-h3-weight: 400;
+  --type-h4-size: 16px;
+  --type-h4-line: 24px;
+  --type-h4-weight: 500;
+  --type-p1-size: 28px;
+  --type-p1-line: 34px;
+  --type-p1-weight: 300;
+  --type-p2-size: 16px;
+  --type-p2-line: 24px;
+  --type-p2-weight: 400;
 
   /* Content measure */
   --measure-hero: 800px;
   --measure-nav: 1280px;
   --measure-work-section: 1280px;
   --measure-work-card: 1120px;
+  --measure-project-card: 1184px;
   /* Narrative column for case study pages (body + hero title/media); fills to gutters below this width */
   --measure-case-study-column: 800px;
   --measure-shell-rest: var(--measure-work-section);
@@ -104,6 +129,53 @@ h4,
 h5,
 h6 {
   margin: 0;
+}
+
+h1,
+.type-h1 {
+  font-family: var(--font-new-spirit);
+  font-size: var(--type-h1-size);
+  line-height: var(--type-h1-line);
+  font-weight: var(--type-h1-weight);
+}
+
+h2,
+.type-h2 {
+  font-family: var(--font-new-spirit);
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  font-weight: var(--type-h2-weight);
+}
+
+h3,
+.type-h3 {
+  font-family: var(--font-inter);
+  font-size: var(--type-h3-size);
+  line-height: var(--type-h3-line);
+  font-weight: var(--type-h3-weight);
+}
+
+h4,
+.type-h4 {
+  font-family: var(--font-inter);
+  font-size: var(--type-h4-size);
+  line-height: var(--type-h4-line);
+  font-weight: var(--type-h4-weight);
+}
+
+.type-p2 {
+  font-family: var(--font-inter);
+  font-size: var(--type-p2-size);
+  line-height: var(--type-p2-line);
+  font-weight: var(--type-p2-weight);
+  margin: 0;
+}
+
+.type-p1 {
+  font-family: var(--font-new-spirit);
+  font-size: var(--type-p1-size);
+  line-height: var(--type-p1-line);
+  font-weight: var(--type-p1-weight);
 }
 
 html,
@@ -154,8 +226,12 @@ html.lenis body {
 
 .work-card-measure {
   width: 100%;
-  max-width: var(--measure-work-card);
+  max-width: var(--measure-project-card);
   margin-inline: auto;
+}
+
+.work-card-copy-measure {
+  width: 100%;
 }
 
 .work-card-cover-frame {
@@ -252,6 +328,10 @@ html.lenis body {
   width: 100%;
   max-width: var(--measure-case-study-column);
   margin-inline: auto;
+}
+
+.case-study-hero-copy-measure {
+  width: 100%;
 }
 
 .case-study-kicker {
@@ -360,7 +440,7 @@ html.lenis body {
   flex: 1 1 0;
   min-width: 0;
   border-radius: var(--radius-small);
-  background: var(--color-sky);
+  background-color: var(--color-sand-50);
   padding: var(--padding-medium);
 }
 
@@ -397,7 +477,14 @@ html.lenis body {
   gap: 0;
 }
 
-.case-study-section-heading,
+.case-study-section-heading {
+  font-family: var(--font-new-spirit);
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  font-weight: var(--type-h2-weight);
+  text-align: center;
+}
+
 .case-study-section-divider {
   font-family: var(--font-roca);
   font-size: 56px;
@@ -471,10 +558,10 @@ html.lenis body {
 .case-study-prose p:not([class]) {
   margin: 0;
   text-align: center;
-  font-family: var(--font-roca);
-  font-weight: 300;
-  font-size: 36px;
-  line-height: 44px;
+  font-family: var(--font-new-spirit);
+  font-size: var(--type-p1-size);
+  line-height: var(--type-p1-line);
+  font-weight: var(--type-p1-weight);
   color: var(--text-secondary);
 }
 
@@ -514,8 +601,10 @@ html.lenis body {
   display: block;
   width: 100%;
   margin-top: var(--size-8);
-  font-size: 14px;
-  line-height: 18px;
+  font-family: var(--font-inter);
+  font-size: var(--type-p2-size);
+  line-height: var(--type-p2-line);
+  font-weight: var(--type-p2-weight);
   color: var(--text-tertiary);
   text-align: center !important;
 }
@@ -565,6 +654,19 @@ html.lenis body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (min-width: 769px) {
+  .work-card-copy-measure {
+    width: 70%;
+    max-width: 70%;
+    justify-self: start;
+  }
+
+  .case-study-hero-copy-measure {
+    width: 70%;
+    margin-inline: auto;
   }
 }
 

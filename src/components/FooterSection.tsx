@@ -34,10 +34,7 @@ export function FooterSection() {
             className="h-[120px] w-[120px] rounded-full"
           />
 
-          <h2
-            className="text-center text-[72px] font-light leading-[72px] tracking-normal text-[color:var(--color-sand-25)]"
-            style={{ fontFamily: "var(--font-roca)" }}
-          >
+          <h2 className="type-h1 text-center text-[color:var(--color-sand-25)]">
             cyrilstephenhere
             <br />
             @gmail.com
