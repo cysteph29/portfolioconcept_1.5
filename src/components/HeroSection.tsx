@@ -1,5 +1,4 @@
-import Image from "next/image";
-// import { SpinningCoin } from "@/src/components/SpinningCoin";
+import { HeroAvatar } from "@/src/components/HeroAvatar";
 
 const HERO_HEADLINE =
   "I'm a product designer fascinated by people, and leverage that to build products worth using.";
@@ -10,23 +9,9 @@ export function HeroSection() {
   return (
     <section
       aria-label="Introduction"
-      className="flex w-full flex-col items-center gap-[length:var(--size-32)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
+      className="flex w-full flex-col items-center gap-[length:var(--size-16)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
     >
-      {/* <SpinningCoin
-        frontImage="/profilepicture.png"
-        size={120}
-        coinThickness={0.2}
-      /> */}
-      <div className="shrink-0 overflow-hidden rounded-full">
-        <Image
-          src="/profilepicture.png"
-          alt="Portrait of Cyril Stephen"
-          width={120}
-          height={120}
-          priority
-          className="h-[120px] w-[120px] rounded-full object-cover"
-        />
-      </div>
+      <HeroAvatar />
       <div className="hero-headline-measure flex w-full flex-col items-center gap-[length:var(--size-16)]">
         <p className="type-h1 text-center text-[color:var(--text-primary)]">
           {HERO_HEADLINE}
