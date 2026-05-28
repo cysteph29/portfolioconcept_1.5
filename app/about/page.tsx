@@ -167,16 +167,16 @@ export default function AboutPage() {
     <main className="flex w-full flex-col items-center pb-[length:var(--size-40)] pt-[length:var(--size-40)]">
       <section
         aria-label="About introduction"
-        className="flex w-full flex-col items-center gap-[length:var(--size-32)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
+        className="flex w-full flex-col items-center gap-[length:var(--size-16)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
       >
         <div className="shrink-0 overflow-hidden rounded-full">
           <Image
             src="/profilepicture.png"
             alt="Portrait of Cyril Stephen"
-            width={120}
-            height={120}
+            width={80}
+            height={80}
             priority
-            className="h-[120px] w-[120px] rounded-full object-cover"
+            className="h-[80px] w-[80px] rounded-full object-cover"
           />
         </div>
 

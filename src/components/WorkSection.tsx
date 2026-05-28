@@ -54,6 +54,7 @@ export function WorkSection({
             <RouteTransitionLink
             key={project.title}
             href={project.href}
+            data-cursor="view"
             className="project-transition-link work-card-measure block overflow-hidden rounded-[length:var(--radius-medium)] bg-[color:var(--color-sand-50)] text-[color:var(--text-primary)] no-underline"
           >
             <article>

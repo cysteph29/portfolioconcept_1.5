@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { CustomCursor } from "@/src/components/CustomCursor";
 import { NavbarGate } from "@/src/components/NavbarGate";
 import { SmoothScrollProvider } from "@/src/components/SmoothScrollProvider";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <NavbarGate />
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+          <CustomCursor />
         </SmoothScrollProvider>
       </body>
     </html>
