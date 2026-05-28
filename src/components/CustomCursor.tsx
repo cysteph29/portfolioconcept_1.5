@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 // Drop the transparent mosaic PNG (just the green circle, no text, no square
 // background) at this path. If the file is missing, the circle simply renders
 // empty behind the live VIEW text.
-const CURSOR_IMAGE_SRC = "/cursor-mosaic.png";
+const CURSOR_IMAGE_SRC = "/cursor-yellowmosaic.png";
 
 const CURSOR_SIZE_PX = 80;
 const CURSOR_SCALE_DURATION_S = 0.25;
@@ -112,7 +112,7 @@ export function CustomCursor() {
           >
             <span
               style={{
-                color: "#ffffff",
+                color: "var(--color-bark)",
                 fontFamily: "var(--font-inter)",
                 fontWeight: 600,
                 fontSize: 14,
