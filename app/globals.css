@@ -106,6 +106,7 @@
   /* Dedicated hero stage width for case-study title + cover media on desktop/laptop */
   --measure-case-study-hero: 1080px;
   --measure-shell-rest: var(--measure-work-section);
+  --site-nav-offset: calc(var(--padding-large) + var(--size-72));
 
   /* Page surface (behind elevated sand-25 UI) */
   --background: var(--color-sand-100);
@@ -318,25 +319,6 @@ html.lenis body {
   padding-inline: var(--padding-large);
 }
 
-.case-study-hero-close {
-  position: absolute;
-  top: var(--size-16);
-  right: var(--size-16);
-  z-index: 2;
-  display: inline-flex;
-  height: 32px;
-  width: 32px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--text-secondary) 70%, transparent);
-  color: var(--text-inverted);
-  font-family: var(--font-gotham);
-  font-size: 22px;
-  line-height: 1;
-  text-decoration: none;
-}
-
 .case-study-hero-media {
   width: 100%;
   max-width: var(--measure-case-study-hero);
@@ -401,6 +383,9 @@ html.lenis body {
 .case-study-cover {
   margin-top: 0;
   width: 100%;
+}
+
+.case-study-cover--image {
   aspect-ratio: 16 / 9;
   min-height: 240px;
   max-height: min(52dvh, 500px);
@@ -414,11 +399,18 @@ html.lenis body {
 }
 
 .case-study-cover-video {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(52dvh, 500px);
   border-radius: var(--radius-medium);
-  object-fit: cover;
   display: block;
+  object-fit: contain;
+}
+
+.case-study-cover--video {
+  display: flex;
+  justify-content: center;
 }
 
 .case-study-figure-image {
@@ -501,7 +493,7 @@ html.lenis body {
   font-size: var(--type-h2-size);
   line-height: var(--type-h2-line);
   font-weight: var(--type-h2-weight);
-  text-align: center;
+  text-align: left;
 }
 
 .case-study-section-divider {
@@ -536,10 +528,10 @@ html.lenis body {
 
 .case-study-section-lead-visual {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  align-self: center;
-  margin-inline: auto;
+  align-self: flex-start;
+  margin-inline: 0;
   border-radius: 999px;
 }
 
@@ -562,7 +554,7 @@ html.lenis body {
 
 .case-study-prose-header {
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: var(--size-24);
@@ -576,7 +568,7 @@ html.lenis body {
 
 .case-study-prose p:not([class]) {
   margin: 0;
-  text-align: center;
+  text-align: left;
   font-family: var(--font-new-spirit);
   font-size: var(--type-p1-size);
   line-height: var(--type-p1-line);
@@ -690,14 +682,22 @@ html.lenis body {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --site-nav-offset: calc(var(--padding-medium) + var(--size-56));
+  }
+
   .case-study-hero {
     border-radius: var(--radius-mobile-large);
     padding-block: var(--size-32);
     padding-inline: var(--padding-medium);
   }
 
-  .case-study-cover {
+  .case-study-cover--image {
     min-height: 220px;
+    max-height: min(46dvh, 360px);
+  }
+
+  .case-study-cover-video {
     max-height: min(46dvh, 360px);
   }
 

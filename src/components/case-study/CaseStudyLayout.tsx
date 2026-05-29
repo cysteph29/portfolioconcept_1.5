@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { FooterSection } from "@/src/components/FooterSection";
 import { WorkSection } from "@/src/components/WorkSection";
-import { CaseStudyCloseButton } from "@/src/components/case-study/CaseStudyCloseButton";
 import { CoverVideo } from "@/src/components/case-study/CoverVideo";
 import { RevealOnScroll } from "@/src/components/case-study/RevealOnScroll";
 
@@ -34,8 +33,6 @@ export function CaseStudyLayout({
         <header className="case-study-header">
           <div className="case-study-hero-wrap">
             <div className="case-study-hero">
-              <CaseStudyCloseButton />
-
               <div className="case-study-hero-content">
                 <div className="case-study-hero-copy-measure">
                   <h1 className="case-study-title">{title}</h1>
@@ -44,7 +41,7 @@ export function CaseStudyLayout({
 
               {coverVideo ? (
                 <div className="case-study-hero-media">
-                  <div className="case-study-cover">
+                  <div className="case-study-cover case-study-cover--video">
                     <CoverVideo src={coverVideo} />
                   </div>
                 </div>
@@ -52,7 +49,7 @@ export function CaseStudyLayout({
 
               {!coverVideo && coverImage ? (
                 <div className="case-study-hero-media">
-                  <div className="case-study-cover">
+                  <div className="case-study-cover case-study-cover--image">
                     <Image
                       src={coverImage}
                       alt={`${title} cover visual`}

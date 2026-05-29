@@ -32,9 +32,11 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-dvh flex-col bg-[color:var(--color-sand-100)]">
         <SmoothScrollProvider>
+          <NavbarGate />
           <PageTransition>
-            <NavbarGate />
-            <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+            <div className="flex min-h-0 flex-1 flex-col pt-[length:var(--site-nav-offset)]">
+              {children}
+            </div>
           </PageTransition>
           <CustomCursor />
         </SmoothScrollProvider>
