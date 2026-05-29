@@ -118,6 +118,13 @@
   --font-sans: var(--font-gotham);
 }
 
+/* Keep html and body on the same beige so the brief held beat between the
+   homepage exit and the case study entrance (and any overscroll) reads as an
+   intentional pause rather than a white flash. */
+html {
+  background: var(--background);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

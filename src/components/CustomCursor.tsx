@@ -28,6 +28,9 @@ export function CustomCursor() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
+  // True while a route transition is in flight. Blocks pointerover from
+  // re-activating the cursor before the new page is ready.
+  const navigatingRef = useRef(false);
 
   useEffect(() => {
     // Coarse pointers (touch) keep their native behavior: no listeners, no
@@ -51,6 +54,8 @@ export function CustomCursor() {
     };
 
     const handleOver = (event: PointerEvent) => {
+      // Do not re-activate while navigating; the new page is not ready yet.
+      if (navigatingRef.current) return;
       if (closestTarget(event.target)) setActive(true);
     };
 
@@ -62,15 +67,33 @@ export function CustomCursor() {
       if (from && from !== to) setActive(false);
     };
 
+    // Hide the cursor and restore the native pointer the moment a card click
+    // triggers a route transition. The cursor stays hidden until the new page
+    // finishes its entrance animation (routetransitionend).
+    const handleTransitionStart = () => {
+      navigatingRef.current = true;
+      setActive(false);
+      document.documentElement.classList.remove("custom-cursor-enabled");
+    };
+
+    const handleTransitionEnd = () => {
+      navigatingRef.current = false;
+      document.documentElement.classList.add("custom-cursor-enabled");
+    };
+
     window.addEventListener("pointermove", handleMove, { passive: true });
     document.addEventListener("pointerover", handleOver, { passive: true });
     document.addEventListener("pointerout", handleOut, { passive: true });
+    window.addEventListener("routetransitionstart", handleTransitionStart);
+    window.addEventListener("routetransitionend", handleTransitionEnd);
 
     return () => {
       reduce.removeEventListener("change", handleReduceChange);
       window.removeEventListener("pointermove", handleMove);
       document.removeEventListener("pointerover", handleOver);
       document.removeEventListener("pointerout", handleOut);
+      window.removeEventListener("routetransitionstart", handleTransitionStart);
+      window.removeEventListener("routetransitionend", handleTransitionEnd);
       document.documentElement.classList.remove("custom-cursor-enabled");
     };
   }, []);

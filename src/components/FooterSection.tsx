@@ -29,15 +29,13 @@ export function FooterSection() {
           <Image
             src="/profilepicture.png"
             alt=""
-            width={120}
-            height={120}
-            className="h-[120px] w-[120px] rounded-full"
+            width={80}
+            height={80}
+            className="h-[80px] w-[80px] rounded-full"
           />
 
           <h2 className="type-h1 text-center text-[color:var(--color-sand-25)]">
-            cyrilstephenhere
-            <br />
-            @gmail.com
+            cyrilstephenhere@gmail.com
           </h2>
 
           <div className="flex items-center gap-[length:var(--size-12)]">

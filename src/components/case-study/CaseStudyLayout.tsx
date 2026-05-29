@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { FooterSection } from "@/src/components/FooterSection";
 import { WorkSection } from "@/src/components/WorkSection";
+import { CaseStudyCloseButton } from "@/src/components/case-study/CaseStudyCloseButton";
 import { CoverVideo } from "@/src/components/case-study/CoverVideo";
 import { RevealOnScroll } from "@/src/components/case-study/RevealOnScroll";
 
@@ -29,18 +29,12 @@ export function CaseStudyLayout({
   children,
 }: CaseStudyLayoutProps) {
   return (
-    <main className="case-study-page-entry flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
+    <main className="flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
       <section className="case-study-hero-outer">
         <header className="case-study-header">
           <div className="case-study-hero-wrap">
             <div className="case-study-hero">
-              <Link
-                href="/"
-                aria-label="Close case study and return home"
-                className="case-study-hero-close"
-              >
-                ×
-              </Link>
+              <CaseStudyCloseButton />
 
               <div className="case-study-hero-content">
                 <div className="case-study-hero-copy-measure">
