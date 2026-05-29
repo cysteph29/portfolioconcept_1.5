@@ -12,8 +12,8 @@ export const HOMEPAGE_ENTRY_DURATION_S = 0.75;
 
 // Case study entrance (forward navigation, homepage -> case study).
 // The subtle rise distance is intentionally small -- felt, not seen.
-export const CASE_STUDY_ENTRY_RISE_PX = 16;
-export const CASE_STUDY_ENTRY_DURATION_S = 0.85;
+export const CASE_STUDY_ENTRY_RISE_PX = 28;
+export const CASE_STUDY_ENTRY_DURATION_S = 1.3;
 
 // Case study exit (back navigation, case study -> homepage).
 // Pure opacity fade -- no transform on exit.
@@ -21,6 +21,14 @@ export const CASE_STUDY_EXIT_DURATION_S = 0.75;
 
 // iOS-style ease-out shared by every leg of the transition.
 export const TRANSITION_EASING = [0.32, 0.72, 0, 1] as const;
+
+// Homepage hero intro (first viewport load only).
+export const HOMEPAGE_HERO_REVEAL_DURATION_S = 1.1;
+export const HOMEPAGE_HERO_REVEAL_RISE_PX = 32;
+
+// Homepage scroll-triggered reveals for below-the-fold sections.
+export const HOMEPAGE_SCROLL_REVEAL_DURATION_S = 0.75;
+export const HOMEPAGE_SCROLL_REVEAL_RISE_PX = 24;
 
 /**
  * Which animated leg the next route mount should play. Set imperatively just

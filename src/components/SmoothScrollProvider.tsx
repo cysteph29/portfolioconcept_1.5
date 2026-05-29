@@ -20,6 +20,16 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    // Land fresh page loads at the top instead of letting the browser restore
+    // the previous scroll position. A restored position is applied before the
+    // async Typekit headline font swaps in; that swap reflows the hero and
+    // pushes everything below it down by a load-dependent amount, which read as
+    // a random few-pixel offset on every load. At the very top there is nothing
+    // above the viewport for the reflow to shift, so the offset disappears.
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
     const initLenis = () => {
       lenisRef.current?.destroy();
       lenisRef.current = null;
@@ -39,6 +49,24 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     initLenis();
 
+    // Pin to the top now and again once web fonts have finished loading, so the
+    // headline reflow cannot leave a residual offset behind. Deep links to an
+    // in-page anchor (e.g. #contact) are left untouched.
+    let cancelled = false;
+    const pinToTop = () => {
+      if (cancelled || window.location.hash) {
+        return;
+      }
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true, force: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    pinToTop();
+    void document.fonts?.ready.then(pinToTop);
+
     const handleReducedMotionChange = () => {
       initLenis();
     };
@@ -46,6 +74,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
 
     return () => {
+      cancelled = true;
       reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
       lenisRef.current?.destroy();
       lenisRef.current = null;
