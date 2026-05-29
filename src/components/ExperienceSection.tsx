@@ -30,7 +30,7 @@ const experiences = [
     dates: "March 24' — July 24'",
   },
   {
-    title: "Marketing Design",
+    title: "Indiana University",
     logoSrc: "/logo-iu.svg",
     description:
       "Brand and marketing design for digital and print touchpoints, campaign visuals, and stakeholder-facing materials.",
