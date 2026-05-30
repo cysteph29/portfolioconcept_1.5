@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 const socialLinks = [
   {
@@ -18,18 +19,33 @@ const socialLinks = [
   },
 ] as const;
 
+const FOOTER_RING_SPIN_DURATION = "24s";
+
 export function FooterSection() {
   return (
     <footer aria-label="Footer" className="w-full overflow-hidden bg-[color:var(--color-bark)]">
       <div className="w-full px-[24px] py-[80px]">
         <div className="flex flex-col items-center gap-[24px]">
-          <Image
-            src="/profilepicture.png"
-            alt=""
-            width={80}
-            height={80}
-            className="h-[80px] w-[80px] rounded-full"
-          />
+          <div
+            aria-hidden
+            className="relative h-[120px] w-[120px]"
+            style={{ "--footer-emblem-spin-duration": FOOTER_RING_SPIN_DURATION } as CSSProperties}
+          >
+            <Image
+              src="/footer-ring.png"
+              alt=""
+              fill
+              sizes="120px"
+              className="footer-emblem-ring absolute inset-0 h-full w-full object-contain"
+            />
+            <Image
+              src="/footer-boot.png"
+              alt=""
+              fill
+              sizes="120px"
+              className="absolute inset-0 z-[1] h-full w-full object-contain"
+            />
+          </div>
 
           <h2 className="type-h1 text-center text-[color:var(--color-sand-25)]">
             cyrilstephenhere@gmail.com

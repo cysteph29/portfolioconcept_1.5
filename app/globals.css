@@ -255,6 +255,12 @@ html.lenis body {
   position: relative;
 }
 
+.footer-emblem-ring {
+  transform-origin: center;
+  will-change: transform;
+  animation: footerEmblemSpin var(--footer-emblem-spin-duration, 24s) linear infinite;
+}
+
 /* Hide the native cursor only when the custom cursor is engaged. The
    .custom-cursor-enabled class is added to <html> by CustomCursor on fine
    pointer devices, so coarse (touch) devices keep their native behavior. */
@@ -665,6 +671,15 @@ html.lenis body {
   }
 }
 
+@keyframes footerEmblemSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (min-width: 769px) {
   .work-card-copy-measure {
     width: 70%;
@@ -719,6 +734,11 @@ html.lenis body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .footer-emblem-ring {
+    animation: none;
+    will-change: auto;
+  }
+
   .case-study-page-entry {
     animation: none;
   }
