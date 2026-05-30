@@ -1,7 +1,9 @@
-import Image from "next/image";
-import { Fragment, type ReactNode } from "react";
+"use client";
+
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { FooterSection } from "@/src/components/FooterSection";
 import { CaseStudySectionDivider } from "@/src/components/case-study/CaseStudyLayout";
+import { CoinEmblem } from "@/src/components/CoinEmblem";
 
 const ABOUT_TITLE = "Hi, Cyril here";
 
@@ -86,7 +88,16 @@ const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
         <br />
         <br />
         I slowly chipped away at my skills over time, and eventually landed my
-        first product design gig from this tweet.
+        first product design gig from{" "}
+        <a
+          href="https://x.com/cyril_design/status/1636274285584216065"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline text-[color:var(--color-bark)]"
+        >
+          this tweet
+        </a>
+        .
       </p>
     ),
   },
@@ -163,22 +174,53 @@ const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
 ];
 
 export default function AboutPage() {
+  const footerHostRef = useRef<HTMLDivElement | null>(null);
+  const [footerHeight, setFooterHeight] = useState(0);
+
+  useEffect(() => {
+    const footerHost = footerHostRef.current;
+    if (!footerHost) return;
+
+    const measureFooter = () => {
+      setFooterHeight(Math.ceil(footerHost.getBoundingClientRect().height));
+    };
+
+    measureFooter();
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(measureFooter);
+      resizeObserver.observe(footerHost);
+    }
+
+    window.addEventListener("resize", measureFooter);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", measureFooter);
+    };
+  }, []);
+
   return (
-    <main className="flex w-full flex-col items-center pb-[length:var(--size-40)] pt-[length:var(--size-40)]">
+    <div className="relative w-full bg-[color:var(--color-bark)]">
+      <div className="fixed bottom-0 left-0 z-0 w-full">
+        <div ref={footerHostRef}>
+          <FooterSection />
+        </div>
+      </div>
+
+      <main className="relative z-[1] flex w-full flex-col items-center rounded-b-[length:var(--radius-x-large)] bg-[color:var(--color-sand-100)] pb-[length:var(--size-48)] pt-[length:var(--size-40)] max-md:rounded-b-[length:var(--radius-mobile-x-large)]">
       <section
         aria-label="About introduction"
         className="flex w-full flex-col items-center gap-[length:var(--size-16)] px-[length:var(--page-gutter-fluid)] pb-[length:var(--size-40)]"
       >
-        <div className="shrink-0 overflow-hidden rounded-full">
-          <Image
-            src="/profilepicture.png"
-            alt="Portrait of Cyril Stephen"
-            width={80}
-            height={80}
-            priority
-            className="h-[80px] w-[80px] rounded-full object-cover"
-          />
-        </div>
+        <CoinEmblem
+          ringSrc="/footer-ring.png"
+          centerSrc="/header-face.png"
+          size={104}
+          centerAlt="Portrait of Cyril Stephen"
+          priority
+        />
 
         <h1
           className="hero-headline-measure text-center text-[96px] font-light leading-[96px] tracking-normal text-[color:var(--text-primary)]"
@@ -217,7 +259,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <FooterSection />
-    </main>
+      </main>
+      <div aria-hidden className="pointer-events-none w-full" style={{ height: `${footerHeight}px` }} />
+    </div>
   );
 }
