@@ -48,8 +48,39 @@ export function SiteNavbar() {
   const pathname = usePathname();
   const [isHidden, setIsHidden] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  // Suppresses the slide/fade transition so the nav snaps to its resting
+  // position instead of animating. Starts true so the very first paint never
+  // plays an entrance, and is re-asserted on every route change below.
+  const [suppressTransition, setSuppressTransition] = useState(true);
+  const [snappedPath, setSnappedPath] = useState(pathname);
   const isHiddenRef = useRef(false);
   const lastScrollYRef = useRef(0);
+
+  // On every route change, snap the nav to its visible resting state with no
+  // transition. The nav lives in the persistent layout, so without this its
+  // hidden state would survive navigation and then animate back in
+  // (slide-down-from-above) once scroll resets to the top of the new page — an
+  // unwanted entrance. This render-phase reset (keyed on the path) is React's
+  // recommended way to adjust state when a value changes; the transition is
+  // re-enabled one frame later so real scroll gestures still animate.
+  if (snappedPath !== pathname) {
+    setSnappedPath(pathname);
+    setIsHidden(false);
+    setSuppressTransition(true);
+  }
+
+  useEffect(() => {
+    // Keep the scroll handler's dedup ref in sync with the reset above, then
+    // re-enable the transition one frame later.
+    isHiddenRef.current = false;
+    const frame = requestAnimationFrame(() => {
+      setSuppressTransition(false);
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -124,7 +155,7 @@ export function SiteNavbar() {
         transform: reducedMotion || !isHidden ? "translateY(0)" : "translateY(-100%)",
         opacity: reducedMotion || !isHidden ? 1 : 0,
         pointerEvents: isHidden ? "none" : "auto",
-        transitionDuration: reducedMotion ? "0ms" : undefined,
+        transitionDuration: reducedMotion || suppressTransition ? "0ms" : undefined,
       }}
     >
       <nav
