@@ -312,9 +312,6 @@ html.lenis body {
   position: relative;
   border-radius: var(--radius-large);
   background-color: var(--color-sand-150);
-  background-image: url('/whitemosaic.png');
-  background-repeat: repeat;
-  background-size: 449px 449px;
   padding-block: var(--size-40);
   padding-inline: var(--padding-large);
 }
