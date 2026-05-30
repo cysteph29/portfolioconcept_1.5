@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { FooterSection } from "@/src/components/FooterSection";
+import { FixedFooterPageShell } from "@/src/components/FixedFooterPageShell";
 import { WorkSection } from "@/src/components/WorkSection";
 import { CoverVideo } from "@/src/components/case-study/CoverVideo";
 import { RevealOnScroll } from "@/src/components/case-study/RevealOnScroll";
@@ -28,7 +28,10 @@ export function CaseStudyLayout({
   children,
 }: CaseStudyLayoutProps) {
   return (
-    <main className="flex w-full flex-col items-center pb-[length:var(--size-56)] pt-[length:var(--page-gutter-fluid)]">
+    <FixedFooterPageShell
+      footerId="contact"
+      mainClassName="relative z-[1] flex w-full flex-col items-center rounded-b-[length:var(--radius-x-large)] bg-[color:var(--color-sand-100)] pb-[length:var(--size-48)] pt-[length:var(--page-gutter-fluid)] max-md:rounded-b-[length:var(--radius-mobile-x-large)]"
+    >
       <section className="case-study-hero-outer">
         <header className="case-study-header">
           <div className="case-study-hero-wrap">
@@ -92,11 +95,7 @@ export function CaseStudyLayout({
           </div>
         </RevealOnScroll>
       </section>
-
-      <RevealOnScroll className="case-study-scroll-reveal w-full">
-        <FooterSection />
-      </RevealOnScroll>
-    </main>
+    </FixedFooterPageShell>
   );
 }
 
