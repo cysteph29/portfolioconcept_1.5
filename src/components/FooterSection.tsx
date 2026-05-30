@@ -20,11 +20,8 @@ const socialLinks = [
 
 export function FooterSection() {
   return (
-    <footer
-      aria-label="Footer"
-      className="mt-[length:var(--size-40)] w-full px-[length:var(--page-gutter-fluid)]"
-    >
-      <div className="mx-auto w-full max-w-[length:var(--measure-shell-rest)] rounded-[length:var(--radius-2x-large)] bg-[color:var(--color-bark)] px-[24px] py-[80px]">
+    <footer aria-label="Footer" className="w-full overflow-hidden bg-[color:var(--color-bark)]">
+      <div className="w-full px-[24px] py-[80px]">
         <div className="flex flex-col items-center gap-[24px]">
           <Image
             src="/profilepicture.png"
