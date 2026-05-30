@@ -1,5 +1,6 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
+
+import { CoinEmblem, COIN_EMBLEM_SPIN_DURATION } from "./CoinEmblem";
 
 const socialLinks = [
   {
@@ -19,31 +20,17 @@ const socialLinks = [
   },
 ] as const;
 
-const FOOTER_RING_SPIN_DURATION = "24s";
-
 export function FooterSection() {
   return (
     <footer aria-label="Footer" className="w-full overflow-hidden bg-[color:var(--color-bark)]">
       <div className="w-full px-[24px] py-[80px]">
         <div className="flex flex-col items-center gap-[24px]">
-          <div
-            aria-hidden
-            className="relative h-[120px] w-[120px]"
-            style={{ "--footer-emblem-spin-duration": FOOTER_RING_SPIN_DURATION } as CSSProperties}
-          >
-            <Image
-              src="/footer-ring.png"
-              alt=""
-              fill
-              sizes="120px"
-              className="footer-emblem-ring absolute inset-0 h-full w-full object-contain"
-            />
-            <Image
-              src="/footer-boot.png"
-              alt=""
-              fill
-              sizes="120px"
-              className="absolute inset-0 z-[1] h-full w-full object-contain"
+          <div aria-hidden>
+            <CoinEmblem
+              ringSrc="/footer-ring.png"
+              centerSrc="/footer-boot.png"
+              size={120}
+              spinDuration={COIN_EMBLEM_SPIN_DURATION}
             />
           </div>
 
